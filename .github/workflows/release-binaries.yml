@@ -79,7 +79,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Test build for the Ocarina handheld fix: Windows (MSVC) only.
+          # Test build for the Ocarina handheld fix: Windows (MSVC) only (run 2).
           - platform: windows-x86_64
             runner: windows-2022
 
