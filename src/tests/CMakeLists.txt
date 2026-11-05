@@ -67,6 +67,7 @@ add_executable(tests
     video_core/ampere_ported_conversions.cpp
     video_core/ampere_ported_uniform_vote.cpp
     video_core/ampere_ported_textures.cpp
+    video_core/ampere_handheld_half_gather.cpp
     video_core/ampere_tennis_i2f.cpp
     video_core/ampere_tennis_tessellation.cpp
     video_core/pipeline_cache_files.cpp

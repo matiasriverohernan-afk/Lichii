@@ -108,7 +108,8 @@ TEST_CASE("Ampere per-tap gathers reject unproven offsets and unsupported modes"
             REQUIRE(lowered.error == "native per-tap gather offset range");
         }
     }
-    for (const u32 bit : {60U, 72U, 76U, 78U, 79U, 80U, 81U, 89U, 91U}) {
+    // Bit 79 (half results) is a supported per-tap mode; see ampere_handheld_half_gather.cpp.
+    for (const u32 bit : {60U, 72U, 76U, 78U, 80U, 81U, 89U, 91U}) {
         auto invalid = PerTapProgram();
         invalid[2].words[bit / 32] ^= 1U << (bit % 32);
         INFO("bit " << bit);
