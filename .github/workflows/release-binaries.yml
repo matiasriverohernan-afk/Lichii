@@ -79,7 +79,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Test build for the Ocarina handheld fix: Windows (MSVC) only (run 2).
+          # Test build for the Ocarina handheld fix: Windows (MSVC) only (run 3).
           - platform: windows-x86_64
             runner: windows-2022
 
@@ -624,6 +624,13 @@ jobs:
           # Asset names drop the commit sha: the release tag already identifies the build, and
           # stable names let the notes table link to them.
           strip_sha() { sed "s/-${GITHUB_SHA}//" <<< "$1"; }
+          # With a single matching artifact, download-artifact extracts it straight into
+          # artifacts/ instead of artifacts/<name>/: package that case as the Windows zip.
+          if [[ -e artifacts/lichii.exe ]]; then
+            (cd artifacts && zip -qr "${GITHUB_WORKSPACE}/dist/lichii-windows-x86_64.zip" .)
+            ls -la dist
+            exit 0
+          fi
           for artifact in artifacts/*/; do
             name=$(basename "$artifact")
             if compgen -G "$artifact*.AppImage" > /dev/null; then
